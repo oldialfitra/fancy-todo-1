@@ -5,13 +5,12 @@
 **Note:**  <br>*  *is required*<br> ** *required if from project**
  HTTP | Router | Headers | Body | Success | Error | Description
 ------|--------|---------|------|---------|-------|------------
- POST | <span style="color:red">/todos</span> | *token, **projectId | *name, *description, *dueDate, **projectId / *userId | Status: 201<br>Object{id, name, description, dueDate, projectId / userId} | Status: 400<br>Object { message: `name / description / dueDate required` }<br>Status: 500<br>Object { message: `Internal Server Error`, err } | Create a Todo
- GET | <span style="color:red">/todos/allSelf/:id</span> | *token |  | Status: 200<br>[Object{id, name, description, dueDate, projectId / userId}] | Status: 500<br>Object { message: `Internal Server Error`, err } | All User's Todo without Project's Todo
- GET | <span style="color:red">/todos/allProject/:id</span> | *token |  | Status: 200<br>[Object{id, name, description, dueDate, projectId / userId}] | Status: 500<br>Object { message: `Internal Server Error`, err } | All Project's Todo without User's Todo
- DELETE | <span style="color:red">/todos/:id</span> | *token, **projectId |  | Deleted Todo -> Object{id, name, description, dueDate, projectId / userId} | Status: 500<br>Object { message: `Internal Server Error`, err } | Delete a Todo
- PUT | <span style="color:red">/todos/:id</span> | *token, **projectId | name, description | Updated Todo -> Object{id, name, description, dueDate, projectId / userId} | Status: 500<br>Object { message: `Internal Server Error`, err } | Update a Todo
- GET | <span style="color:red">/todos/:id</span> | *token, **projectId |  | Object{id, name, description, dueDate, projectId / userId} | Status: 500<br>Object { message: `Internal Server Error`, err } | Get a Todo
- PUT | <span style="color:red">/todos/:id</span> | *token | userId | Updated Todo -> Object{id, name, description, dueDate, projectId / userId} | Status: 500<br>Object { message: `Internal Server Error`, err } | dueDate a Todo
+ POST | <span style="color:red">/todos</span> | *token, **projectId | *name, *description, *dueDate, **projectId / *userId | Status: 201<br>Object{id, name, description, dueDate, status, projectId / userId} | Status: 400<br>Object { message: `name / description / dueDate required` }<br>Status: 500<br>Object { message: `Internal Server Error`, err } | Create a Todo
+ GET | <span style="color:red">/todos/allSelf/:id</span> | *token |  | Status: 200<br>[Object{id, name, description, dueDate, status, projectId / userId}] | Status: 500<br>Object { message: `Internal Server Error`, err } | All User's Todos without Project's Todo
+ GET | <span style="color:red">/todos/allProject/:id</span> | *token |  | Status: 200<br>[Object{id, name, description, dueDate, status, projectId / userId}] | Status: 500<br>Object { message: `Internal Server Error`, err } | All Project's Todos without User's Todo
+ DELETE | <span style="color:red">/todos/:id</span> | *token, **projectId |  | Status: 200<br>Object{id, name, description, dueDate, status, projectId / userId} | Status: 500<br>Object { message: `Internal Server Error`, err } | Delete a Todo
+ PUT | <span style="color:red">/todos/:id</span> | *token, **projectId | *name, *description, *dueDate, *status | Status: 200<br>Object{id, name, description, dueDate, status, projectId / userId} | Status: 500<br>Object { message: `Internal Server Error`, err } | Update a Todo
+ GET | <span style="color:red">/todos/:id</span> | *token, **projectId |  | Status: 200<br>Object{id, name, description, dueDate, status, projectId / userId} | Status: 500<br>Object { message: `Internal Server Error`, err } | Get a Todo
 
 <br>
 
@@ -29,11 +28,11 @@
 **Note:**  <br>*  *is required*
   HTTP | Router | Headers | Body | Success | Error | Description
 ------|--------|---------|------|---------|-------|------------
- POST | <span style="color:red">/projects</span> | *token | *name, *membersId | Status: 201<br> Object {id, name, [membersId]} | Object { message: `Internal Server Error`, err } | Create a Project
- GET | <span style="color:red">/projects</span> | *token |  | Status: 200<br>[Object {id, name, [membersId]}] | Status: 500<br>Object { message: `Internal Server Error`, err } | All Projects
- DELETE | <span style="color:red">/projects/:id</span> | *token |  | Status: 200<br>Object {id, name, [membersId]} | Status: 500<br>Object { message: `Internal Server Error`, err } | Delete a Project
- PUT | <span style="color:red">/projects/:id</span> | *token, *projectId | *email | Status:200<br>Object {id, name, [membersId]} | Status: 500<br>Object { message: `Internal Server Error`, err } | Add a member to project
- GET | <span style="color:red">/projects/:id</span> | *token |  | Status: 200<br>Object {id, name, [membersId]} | Status: 500<br>Object { message: `Internal Server Error`, err } | Get a Project
+ POST | <span style="color:red">/projects</span> | *token | *name, *membersId | Status: 201<br> Object {id, name, [members]} | Object { message: `Internal Server Error`, err } | Create a Project
+ GET | <span style="color:red">/projects</span> | *token |  | Status: 200<br>[Object {id, name, [members]}] | Status: 500<br>Object { message: `Internal Server Error`, err } | All Projects
+ DELETE | <span style="color:red">/projects/:id</span> | *token |  | Status: 200<br>Object {id, name, [members]} | Status: 500<br>Object { message: `Internal Server Error`, err } | Delete a Project
+ PUT | <span style="color:red">/projects/:id</span> | *token, *projectId | *email | Status:200<br>Object {id, name, [members]} | Status: 500<br>Object { message: `Internal Server Error`, err } | Add a member to Project
+ GET | <span style="color:red">/projects/:id</span> | *token |  | Status: 200<br>Object {id, name, [members]} | Status: 500<br>Object { message: `Internal Server Error`, err } | Get a Project
 
 ## Usage
 
