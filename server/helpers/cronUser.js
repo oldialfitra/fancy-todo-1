@@ -12,13 +12,15 @@ module.exports = () => {
             .then(function (allTodo) {
                 allTodo.forEach(e => {
                     if (e.userId) {
-                        console.log(e)
-                        let text = `Hello, ${e.userId.email}!<br>Your todo for "${e.name}" not yet completed so we remind you to about this todo<br>Thank You!`
-                        let email = e.userId.email
-                        queue.create('email', {
-                            email,
-                            text
-                        }).save()
+                        if (e.status === false) {
+                            console.log(e)
+                            let text = `Hello, ${e.userId.email}!<br>Your todo for "${e.name}" not yet completed so we remind you to about this todo<br>Thank You!`
+                            let email = e.userId.email
+                            queue.create('email', {
+                                email,
+                                text
+                            }).save()
+                        }
                     }
                 });
             })

@@ -17,15 +17,17 @@ module.exports = () => {
             .then(function (allTodo) {
                 allTodo.forEach(e => {
                     if (e.projectId) {
-                        console.log(e.projectId.members)
-                        e.projectId.members.forEach(f => {
-                            let text = `Hello, ${f.email}!<br>Your todo for "${e.name}" in project "${e.projectId.name}" not yet completed so we remind you to about this todo<br>Thank You!`
-                            let email = f.email
-                            queue.create('email', {
-                                email,
-                                text
-                            }).save()
-                        });
+                        if (e.status === false) {
+                            console.log(e.projectId.members)
+                            e.projectId.members.forEach(f => {
+                                let text = `Hello, ${f.email}!<br>Your todo for "${e.name}" in project "${e.projectId.name}" not yet completed so we remind you to about this todo<br>Thank You!`
+                                let email = f.email
+                                queue.create('email', {
+                                    email,
+                                    text
+                                }).save()
+                            });
+                        }
                     }
                 });
             })
