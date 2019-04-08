@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="google-signin-client_id"
+        content="362321183566-a332i5c400q2jk39q5vf9ev8974693hq.apps.googleusercontent.com">
+    <title>Fancy To-Do</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-dark">
+        <div id="homeIn" class="col-sm-2">
+            <a href="#" role="button" onclick="showList()">
+                <h1 style="color: whitesmoke">Fancy To-Do</h1>
+            </a>
+        </div>
+        <div id="homeOut" class="col-sm-2">
+                <a href="#" role="button">
+                    <h1 style="color: whitesmoke">Fancy To-Do</h1>
+                </a>
+            </div>
+        <div id="nav-add-self" class="col-sm-2">
+            <a href="#" onclick="showAddFormSelf()">Add Todo</a>
+        </div>
+        <div id="nav-add-project-self" class="col-sm-2">
+            <a href="#" onclick="showAddProject()">Add Project</a>
+        </div>
+        <div id="nav-add-project" class="col-sm-2">
+            <a href="#" onclick="showAddToDoProject()">Add ToDo</a>
+        </div>
+        <div id="nav-back" class="col-sm-1">
+            <a href="#" onclick="backToDo()">Back To ToDo</a>
+        </div>
+        <div id="nav-add-member" class="col-sm-1">
+            <a href="#" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">Add Member</a>
+        </div>
+        <div class="col-sm-6">
+            <div id="googleOut">
+                <a class="float-right" href="#" onclick="signOut();">Sign out</a>
+            </div>
+        </div>
+    </nav>
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form onsubmit="addMember()">
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Email:</label>
+                            <input type="email" class="form-control" id="emailMember" required>
+                        </div>
+                    </form>
+                </div>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+    <div id="loginForm" class="container">
+        <div class="wrapper fadeInDown">
+            <div id="formContent">
+                <!-- Tabs Titles -->
+
+                <!-- Icon -->
+                <div class="fadeIn first">
+                    <span>Sign In</span>
+                </div>
+
+                <!-- Login Form -->
+                <form id="login-form">
+                    <input type="email" id="emailLogin" class="fadeIn second" name="email" placeholder="email" required>
+                    <input type="password" id="passwordLogin" class="fadeIn third" name="password"
+                        placeholder="password" required>
+                    <input type="submit" class="fadeIn fourth" value="Sign In">
+                </form>
+
+                <!-- Remind Passowrd -->
+                <div id="formFooter">
+                    <div>
+                        <a href="#" onclick="changeToRegister()">Need New Account?</a>
+                    </div>
+                    <div id="googleIn">
+                        <div class="g-signin2" data-onsuccess="onSignIn"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="registerForm" class="container">
+        <div class="wrapper fadeInDown">
+            <div id="formContent">
+                <!-- Tabs Titles -->
+
+                <!-- Icon -->
+                <div class="fadeIn first">
+                    <span>Sign Up</span>
+                </div>
+
+                <!-- Login Form -->
+                <form id="register-form">
+                    <input type="email" id="emailRegister" class="fadeIn second" name="email" placeholder="email"
+                        required>
+                    <input type="password" id="passwordRegister" class="fadeIn third" name="login"
+                        placeholder="password" required>
+                    <input type="submit" class="fadeIn fourth" value="Sign Up">
+                </form>
+                <div id="formFooter">
+                    <div>
+                        <a href="#" onclick="changetoLogin()">Already have an account?</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="main" class="container">
+        <div class="row">
+            <div id="all-projects" class="col-sm-6"></div>
+            <div id="list-self-todo" class="col-sm-6"></div>
+        </div>
+        <div id="project">
+            <div id="list-project-todo"></div>
+        </div>
+        <div id="add-todo" class="container">
+            <h3 class="text-center">Add Todo</h3>
+            <div id="div1" class="well text-center">
+                <form onsubmit="addTodo()">
+                    <div class="form-group">
+                        <label for="formGroupExampleInput">Name</label>
+                        <input type="text" class="form-control text-center" id="nameAddSelf" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="formGroupExampleInput2">Description</label>
+                        <input type="text" class="form-control text-center" id="descriptionAddSelf" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="formGroupExampleInput2">Due Date</label>
+                        <input type="date" class="form-control text-center" id="dueDateAddSelf" required>
+                    </div>
+                    <input type="submit" value="Submit">
+                </form>
+            </div>
+        </div>
+        <div id="add-todo-project" class="container">
+            <h3 class="text-center">Add Todo Project</h3>
+            <div id="div1" class="well text-center">
+                <form onsubmit="addTodoProject()">
+                    <div class="form-group">
+                        <label for="formGroupExampleInput">Name</label>
+                        <input type="text" class="form-control text-center" id="nameAddProject" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="formGroupExampleInput2">Description</label>
+                        <input type="text" class="form-control text-center" id="descriptionAddProject" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="formGroupExampleInput2">Due Date</label>
+                        <input type="date" class="form-control text-center" id="dueDateAddProject" required>
+                    </div>
+                    <input type="submit" value="Submit">
+                </form>
+            </div>
+        </div>
+        <div id="update-todo" class="container">
+            <h3 class="text-center">Update Todo</h3>
+            <div id="div1" class="well text-center">
+                <form onsubmit="updateTodo()">
+                    <div class="form-group">
+                        <label for="formGroupExampleInput">Name</label>
+                        <input type="text" class="form-control text-center" id="nameUpdate" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="formGroupExampleInput2">Description</label>
+                        <input type="text" class="form-control text-center" id="descriptionUpdate" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="formGroupExampleInput2">Due Date</label>
+                        <input type="date" class="form-control text-center" id="dueDateUpdate" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="formGroupExampleInput2">Status</label>
+                        <select id="statusUpdate" class="form-control text-center" required>
+                            <option value="true">Complete</option>
+                            <option value="false">Incomplete</option>
+                        </select>
+                    </div>
+                    <input type="submit" value="Submit">
+                </form>
+            </div>
+        </div>
+        <div id="add-project" class="container">
+            <h3 class="text-center">Add Project</h3>
+            <div id="div1" class="well text-center">
+                <form onsubmit="addProject()">
+                    <div class="form-group">
+                        <label for="formGroupExampleInput">Name</label>
+                        <input type="text" class="form-control text-center" id="nameProject" required>
+                    </div>
+                    <input type="submit" value="Submit">
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"
+        integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/postscribe/2.0.8/postscribe.min.js"></script>
+    <script src="./main.js"></script>
+</body>
+
+</html>
