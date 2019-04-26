@@ -71,7 +71,7 @@ $(document).ready(function () {
         event.preventDefault();
         $.ajax({
             method: 'POST',
-            url: 'http://localhost:5000/users/signin',
+            url: 'http://13.58.52.58/users/signin',
             data: {
                 email: $('#emailLogin').val(),
                 password: $('#passwordLogin').val()
@@ -121,7 +121,7 @@ $(document).ready(function () {
         event.preventDefault();
         $.ajax({
             method: 'POST',
-            url: 'http://localhost:5000/users/signup',
+            url: 'http://13.58.52.58/users/signup',
             data: {
                 email: $('#emailRegister').val(),
                 password: $('#passwordRegister').val()
@@ -225,7 +225,7 @@ function onSignIn(googleUser) {
 
     var id_token = googleUser.getAuthResponse().id_token;
     // var xhr = new XMLHttpRequest();
-    // xhr.open('POST', 'http://localhost:5000/users');
+    // xhr.open('POST', 'http://13.58.52.58/users');
     // xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     // xhr.onload = function () {
     //     console.log('Signed in as: ' + xhr.responseText);
@@ -234,7 +234,7 @@ function onSignIn(googleUser) {
     if (!localStorage.getItem('token')) {
         // $('#main').empty()
         $.ajax({
-            url: 'http://localhost:5000/users/googlesignin',
+            url: 'http://13.58.52.58/users/googlesignin',
             method: 'POST',
             data: {
                 idToken: id_token
@@ -286,7 +286,7 @@ function onSignIn(googleUser) {
 function addProject() {
     $.ajax({
         method: 'POST',
-        url: 'http://localhost:5000/projects',
+        url: 'http://13.58.52.58/projects',
         data: {
             name: $('#nameProject').val(),
             memberId: localStorage.getItem('id')
@@ -326,7 +326,7 @@ function getAllProject() {
     let myProjects = ''
     $.ajax({
         method: 'GET',
-        url: `http://localhost:5000/projects`,
+        url: `http://13.58.52.58/projects`,
         headers: {
             token: localStorage.getItem('token')
         }
@@ -388,7 +388,7 @@ function getAllProject() {
 function getOneProject(id) {
     $.ajax({
         method: 'GET',
-        url: `http://localhost:5000/projects/${id}`,
+        url: `http://13.58.52.58/projects/${id}`,
         headers: {
             token: localStorage.getItem('token')
         }
@@ -423,7 +423,7 @@ function addMember() {
     let projectId = localStorage.getItem('projectId')
     $.ajax({
         method: 'PUT',
-        url: `http://localhost:5000/projects/${projectId}`,
+        url: `http://13.58.52.58/projects/${projectId}`,
         data: {
             email: $('#emailMember').val()
         },
@@ -449,7 +449,7 @@ function addMember() {
 function deleteProject(projectId) {
     $.ajax({
         method: 'DELETE',
-        url: `http://localhost:5000/projects/${projectId}`,
+        url: `http://13.58.52.58/projects/${projectId}`,
         headers: {
             token: localStorage.getItem('token')
         }
@@ -499,7 +499,7 @@ function addTodo() {
     console.log('masuk ke add todo')
     $.ajax({
         method: 'POST',
-        url: 'http://localhost:5000/todos',
+        url: 'http://13.58.52.58/todos',
         data: {
             name: $('#nameAddSelf').val(),
             description: $('#descriptionAddSelf').val(),
@@ -544,7 +544,7 @@ function addTodoProject() {
     console.log(localStorage.getItem('projectId'))
     $.ajax({
         method: 'POST',
-        url: 'http://localhost:5000/todos',
+        url: 'http://13.58.52.58/todos',
         data: {
             name: $('#nameAddProject').val(),
             description: $('#descriptionAddProject').val(),
@@ -591,7 +591,7 @@ function getAllTodoSelf() {
     let myTodos = ''
     $.ajax({
         method: 'GET',
-        url: `http://localhost:5000/todos/allSelf/${id}`,
+        url: `http://13.58.52.58/todos/allSelf/${id}`,
         headers: {
             token: localStorage.getItem('token')
         }
@@ -659,7 +659,7 @@ function getAllTodoProject() {
     let myTodos = ''
     $.ajax({
         method: 'GET',
-        url: `http://localhost:5000/todos/allProject/${id}`,
+        url: `http://13.58.52.58/todos/allProject/${id}`,
         headers: {
             token: localStorage.getItem('token'),
             projectId: localStorage.getItem('projectId')
@@ -723,7 +723,7 @@ function getAllTodoProject() {
 // function getOneTodoSelf(id) {
 //     $.ajax({
 //         method: 'GET',
-//         url: `http://localhost:5000/todos/oneSelf/${id}`
+//         url: `http://13.58.52.58/todos/oneSelf/${id}`
 //     })
 //     .done(function (oneProject) {
 //         console.log(oneProject)
@@ -748,7 +748,7 @@ function getOneTodo(id) {
     id = id.toString()
     $.ajax({
         method: 'GET',
-        url: `http://localhost:5000/todos/${id}`,
+        url: `http://13.58.52.58/todos/${id}`,
         headers: {
             token: localStorage.getItem('token'),
             projectId: idProject
@@ -788,7 +788,7 @@ function updateTodo() {
     }
     $.ajax({
         method: 'PUT',
-        url: `http://localhost:5000/todos/${currentId}`,
+        url: `http://13.58.52.58/todos/${currentId}`,
         data: {
             name: $('#nameUpdate').val(),
             description: $('#descriptionUpdate').val(),
@@ -843,7 +843,7 @@ function deleteTodo(id) {
     }
     $.ajax({
         method: 'DELETE',
-        url: `http://localhost:5000/todos/${id}`,
+        url: `http://13.58.52.58/todos/${id}`,
         headers: {
             token: localStorage.getItem('token'),
             projectId: idProject

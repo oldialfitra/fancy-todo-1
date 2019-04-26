@@ -40,6 +40,6 @@ Make sure you have Node.js and npm installed in your computer, and then run thes
 $npm install<br>
 $npm run start or $npm run dev<br>
 
-Access the Server side via http://localhost:5000/.
+Access the Server side via http://13.58.52.58/.
 
 Access the Client side via http://localhost:8080/.
