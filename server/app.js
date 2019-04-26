@@ -8,7 +8,8 @@ const express = require('express'),
     scheduleUser = require('./helpers/cronUser'),
     scheduleProject = require('./helpers/cronProject')
 
-mongoose.connect('mongodb://localhost:27017/fancy-todo-new', {useNewUrlParser:true})
+// mongoose.connect('mongodb://localhost:27017/fancy-todo-new', {useNewUrlParser:true})
+mongoose.connect(`mongodb+srv://oldi:delete@miniwp-9mbzj.gcp.mongodb.net/fancy-todo-new?retryWrites=true`, { useNewUrlParser: true })
 scheduleUser()
 scheduleProject()
 app.use(express.urlencoded({ extended: false }))

@@ -66,6 +66,7 @@ $(document).ready(function () {
     //======================================================= User =============================================
 
     $('#login-form').submit(function () {
+        // $('#main').empty()
         console.log('masuk ke login')
         event.preventDefault();
         $.ajax({
@@ -77,10 +78,13 @@ $(document).ready(function () {
             }
         })
             .done(uLogin => {
-                console.log('signin')
-                console.log(uLogin)
                 localStorage.setItem('token', uLogin.token)
                 localStorage.setItem('id', uLogin.id)
+                getAllTodoSelf()
+                getAllProject()
+
+                console.log('signin')
+                console.log(uLogin)
                 $('#main').show()
                 $('#homeIn').show()
                 $('#homeOut').hide()
@@ -96,8 +100,9 @@ $(document).ready(function () {
                 $('#add-todo-project').hide()
                 $('#update-todo').hide()
                 $('#add-project').hide()
-                getAllTodoSelf()
-                getAllProject()
+                $('#list-self-todo').show()
+                $('#all-projects').show()
+
                 Swal.fire({
                     type: 'success',
                     title: 'Success Login',
@@ -227,6 +232,7 @@ function onSignIn(googleUser) {
     // };
     // xhr.send('idtoken=' + id_token);
     if (!localStorage.getItem('token')) {
+        // $('#main').empty()
         $.ajax({
             url: 'http://localhost:5000/users/googlesignin',
             method: 'POST',
@@ -235,13 +241,12 @@ function onSignIn(googleUser) {
             }
         })
             .done(function (data) {
-                console.log('masuk ke done')
-                console.log('masuk ke done========================')
-                let html = ''
-                console.log('ini token')
                 console.log(data)
                 localStorage.setItem('token', data.token)
                 localStorage.setItem('id', data.id)
+                getAllTodoSelf()
+                getAllProject()
+
                 $('#main').show()
                 $('#homeIn').show()
                 $('#homeOut').hide()
@@ -257,21 +262,15 @@ function onSignIn(googleUser) {
                 $('#add-todo-project').hide()
                 $('#update-todo').hide()
                 $('#add-project').hide()
-                getAllTodoSelf()
-                getAllProject()
+                $('#list-self-todo').show()
+                $('#all-projects').show()
+
                 Swal.fire({
                     type: 'success',
                     title: 'Success Login',
                     showConfirmButton: false,
                     timer: 1500
                 })
-                // $('.classTodo').show()
-                // $('.addTodo').show()
-                // $('.updateTodo').show()
-                // $('.user').hide()
-                // $('.logout').show()
-                // $('.google').hide()
-                // $('#updateTodo').hide()
             })
             .fail(function (err) {
                 console.log(err)
@@ -323,6 +322,7 @@ function addProject() {
 }
 
 function getAllProject() {
+    $('#all-projects').empty()
     let myProjects = ''
     $.ajax({
         method: 'GET',
@@ -584,6 +584,7 @@ function addTodoProject() {
 }
 
 function getAllTodoSelf() {
+    $('#list-self-todo').empty()
     console.log('masuk ke ini')
     let id = localStorage.getItem('id')
     console.log(id)
@@ -652,6 +653,7 @@ function getAllTodoSelf() {
 }
 
 function getAllTodoProject() {
+    $('#list-project-todo').empty()
     console.log('masuk ke dalama all')
     let id = localStorage.getItem('projectId')
     let myTodos = ''
